@@ -1,20 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-cloudant-deployment
+  name: cloudant-deployment
   labels:
-    app: "{{ .Release.Name }}-liberty-starter"
+    app: liberty-starter
     tier: database
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: "{{ .Release.Name }}-liberty-starter"
+        app: liberty-starter
         tier: database
     spec:
       containers:
-      - name: {{ .Release.Name }}-cloudant
+      - name: cloudant-deployment
         image: ibmcom/cloudant-developer
         imagePullPolicy: IfNotPresent
         ports:

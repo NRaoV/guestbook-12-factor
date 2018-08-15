@@ -5,12 +5,10 @@ metadata:
   labels:
     app: {{ .Release.Name }}-app
     tier: frontend
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort
   ports:
-  - port: {{ .Values.service.internalPort }}
-    targetPort: {{ .Values.service.internalPort }}
+  - port: 9080
     protocol: TCP
     name: {{ .Release.Name }}-web-service
   selector:

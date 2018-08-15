@@ -3,42 +3,46 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-web-deployment
   labels:
-    app: {{ .Release.Name }}-app
+    app: "{{ .Release.Name }}-app"
     tier: frontend
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-app
+        app: "{{ .Release.Name }}-app"
         tier: frontend
     spec:
       containers:
-      - name: {{ .Release.Name }}-web
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      - name: "{{ .Release.Name }}-web"
+        image: jzaccone/guestbook
+        imagePullPolicy: Always
         ports:
         - name: http
-          containerPort: {{ .Values.service.internalPort }}
+          containerPort: 9080
         env:
         - name: CLOUDANT_USER
           valueFrom:
             secretKeyRef:
-              name: {{ .Release.Name }}-secrets
+              name: {{ .Values.secretsConfig }}
               key: cloudant-username
         - name: CLOUDANT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Release.Name }}-secrets
+              name: {{ .Values.secretsConfig }}
               key: cloudant-password
         - name: CLOUDANT_HOST
           valueFrom:
             configMapKeyRef:
-              name: {{ .Release.Name }}-configmap
+              name: "{{ .Release.Name }}-configmap"
               key: cloudant-host
         - name: CLOUDANT_PORT
           valueFrom:
               configMapKeyRef:
-                 name: {{ .Release.Name }}-configmap
+                 name: "{{ .Release.Name }}-configmap"
                  key: cloudant-port
+        - name: CLOUDANT_DB_NAME
+          valueFrom:
+              configMapKeyRef:
+                 name: "{{ .Release.Name }}-configmap"
+                 key: cloudant-db-name

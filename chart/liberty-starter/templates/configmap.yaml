@@ -4,5 +4,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap
 data:
-    cloudant-host: {{ .Release.Name }}-cloudant-service
-    cloudant-port: "{{ .Values.global.cloudantPort }}"
+    cloudant-host: {{ .Values.cloudantService }}
+    cloudant-port: "{{ .Values.cloudantPort }}"
+    cloudant-db-name: {{ .Values.cloudantDbName }}

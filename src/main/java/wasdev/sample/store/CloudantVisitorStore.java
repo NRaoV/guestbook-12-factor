@@ -30,12 +30,11 @@ import wasdev.sample.Visitor;
 public class CloudantVisitorStore implements VisitorStore{
 
 	private Database db = null;
-	private static final String databaseName = "mydb";
 
 	public CloudantVisitorStore(){
 		CloudantClient cloudant = createClient();
 		if(cloudant!=null){
-		 db = cloudant.database(databaseName, true);
+		 db = cloudant.database((System.getenv("CLOUDANT_DB_NAME")) , true);
 		}
 	}
 
@@ -46,19 +45,7 @@ public class CloudantVisitorStore implements VisitorStore{
 	private static CloudantClient createClient() {
 
 		String url;
-
-		if (System.getenv("VCAP_SERVICES") != null) {
-			// When running in IBM Cloud, the VCAP_SERVICES env var will have the credentials for all bound/connected services
-			// Parse the VCAP JSON structure looking for cloudant.
-            System.out.println("Running in IBMCloud. Looking for credentials in VCAP_SERVICES env var");
-			JsonObject cloudantCredentials = VCAPHelper.getCloudCredentials("cloudant");
-			if(cloudantCredentials == null){
-				System.out.println("No cloudant database service bound to this application");
-				return null;
-			}
-			url = cloudantCredentials.get("url").getAsString();
-            System.out.println("URL is " + url);
-		} else if ((System.getenv("CLOUDANT_HOST") != null) && (System.getenv("CLOUDANT_PORT") != null) && (System.getenv("CLOUDANT_USER") != null) && (System.getenv("CLOUDANT_PASSWORD") != null)) {
+		if ((System.getenv("CLOUDANT_HOST") != null) && (System.getenv("CLOUDANT_PORT") != null) && (System.getenv("CLOUDANT_USER") != null) && (System.getenv("CLOUDANT_PASSWORD") != null)) {
              System.out.println("Running in Kubernetes. Looking for credentials in env vars");
              StringBuilder urlBuffer = new StringBuilder();
 			 urlBuffer.append("http://");

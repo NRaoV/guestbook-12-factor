@@ -4,5 +4,5 @@ description: A Helm chart for Kubernetes for an embedded Cloudant instance for a
 name: embedded-cloudant
 version: 0.1.0
 maintainers:
-  - name: David Carew
-    email: carew@us.ibm.com
+  - name: John Zaccone
+    email: john.zaccone@gmail.com

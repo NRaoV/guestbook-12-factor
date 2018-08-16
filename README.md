@@ -13,7 +13,7 @@ Visualization of over-simplified microservice architecture:
 <img src="images/microservices-simplified2.png" width="70%">
 
 ### The 12-Factor Checklist
-I. Codebase
+##### I. Codebase
 
 - [ ] All code changes to your application can be are tracked to a single codebase
 - [ ] Use appropriate dependency management for your langauage for libraries shared between projects. For Java, Gradle or Maven are popular: [pom.xml](pom.xml)

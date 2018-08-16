@@ -8,6 +8,10 @@ The following checklist is focused on a single app running in a microservice arc
 
 This repo is written in Java and uses Docker, Kubernetes and Helm to complete this checklist. Feel free to apply 12-factor with any tools that you find useful.
 
+Visualization of over-simplified microservice architecture:
+
+![](images/microservices-simplified.png)
+
 ### The 12-Factor Checklist
 I. Codebase
 

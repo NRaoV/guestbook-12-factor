@@ -9,9 +9,9 @@ The following checklist is focused on a single app running in a microservice arc
 ### The 12-Factor Checklist
 I. Codebase
 
-- [] All code changes to your application can be are tracked to a single codebase
-- [] Use appropriate dependency management such as Maven: [pom.xml](pom.xml)
-- [] Exercise version pinning so that things can't change under your feet between builds
+- [ ] All code changes to your application can be are tracked to a single codebase
+- [ ] Use appropriate dependency management such as Maven: [pom.xml](pom.xml)
+- [ ] Exercise version pinning so that things can't change under your feet between builds
 
 II. Dependencies
 

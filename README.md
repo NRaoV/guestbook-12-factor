@@ -15,11 +15,15 @@ Visualization of over-simplified microservice architecture:
 ### The 12-Factor Checklist
 ##### I. Codebase
 
+Code for a single application should be in a single code base.
+
 - [ ] All code changes to your application can be are tracked to a single codebase
 - [ ] Use appropriate dependency management for your langauage for libraries shared between projects. For Java, Gradle or Maven are popular: [pom.xml](pom.xml)
 - [ ] Version pin your dependencies so that things can't change under your feet between builds
 
 ##### II. Dependencies
+
+Explicitly declare and isolate dependencies. Never rely on system dependencies.
 
 - [ ] All dependencies are explicitly declared using a dependency declaration manifest such as a [Dockerfile](Dockerfile).
 - [ ] Your app runs in isolation to prevent any system dependencies from being used accidently, such as in a Docker container. 

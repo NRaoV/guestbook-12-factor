@@ -33,16 +33,22 @@ Explicitly declare and isolate dependencies. Never rely on system dependencies.
 
 ##### III. Config
 
+Store Config in the environment (not in the code). 
+
 - [ ] You only build once for deploys to all of your environments
 - [ ] Configuration that changes between builds are passed into the app as environment variables. Options for passing include Docker `Config`, Kubernetes `ConfigMaps` and Helm `values.yaml`. 
 - [ ] Secrets are passed in using secure methods such as `Docker Secrets` or `Kubernetes Secrets` and no secrets are stored in version control
 
 ##### IV. Backing Services
 
+Treat backing resources as attached services. 
+
 - [ ] Connect to backing resources via URL + secrets. Example of loading cloudant database via URL in Java code: [here](src/main/java/wasdev/sample/store/CloudantVisitorStore.java)
 - [ ] Externize connection info into external config. Such as in helm [values.yaml](charts/liberty-starter/values.yaml)
 
 ##### V. Build, Release, Run
+
+Strictly separate build and run stages. 
 
 - [ ] Builds are triggered via a code change. With microservices, this must be automated and this automation lives in source control with the app. Such as with a (JenkinsFile)[JenkinsFile]
 - [ ] Builds result in a release with a unique release ID to be easily referenced in the "Run" stage. Example of a release would be a Docker Image, stored in a central registry (accessable in all environments), tagged with a release ID such as a build number or git commit hash.
@@ -50,19 +56,27 @@ Explicitly declare and isolate dependencies. Never rely on system dependencies.
 
 ##### VI. Processes
 
+Execute app as stateless process
+
 - [ ] Move state (sticky sessions) from within your app to an external service such as redis or cloudant. This app stores its guestbook state in a cloudant DB as seen [here](src/main/java/wasdev/sample/rest/VisitorAPI.java)
 
 ##### VII. Port Binding
+
+Export services via port binding. Apps should be self-contained.
 
 - [ ] Embed runtime execution environments into the app. Such as with the `FROM websphere-liberty:webProfile7` in the [Dockerfile](Dockerfile)
 - [ ] Expose service (such as HTTP) via a port and allow other apps by following `IV. Backing Services` factor. For this app, this is done via [server.xml](server.xml) and available for consumption by other services via the Kubernetes [service](charts/liberty-starter/templates/service.yaml). 
 
 ##### VIII. Concurrency
 
+Scale out via the process model
+
 - [ ] Scale out by adding more instances of your application (horizontal scaling) rather than adding more resources (vertical scaling). This is done in Kubernetes by increasing the number of replicas in the [deployment.yaml](charts/liberty-starter/templates/deployment.yaml) or by using the `kubectl scale` command
 - [ ] The process for your application is a first-class citizen for your deployment platform. Containers are just processes. If your app is running as PID 1, you can ensure that Kubernetes or Swarm can manage and scale that process like any other.
 
 ##### IX. Disposability
+
+Maximize robustness with fast startup and graceful shutdown
 
 - [ ] Minimize startup times. Startup times can be reduced by using Docker and taking advantage of its built in layering system. Also consider lazy-loading or other practices to reduce times.
 - [ ] Handle SIGTERM events sent to your application. With Docker you can test by running `docker run` without the `-d` flag, and typing `ctrl+c` in your console to see how your container shuts down.
@@ -73,12 +87,16 @@ If using Kubernetes, you can also take advantage of [container lifecycle hooks](
 
 ##### X. Dev/Prod Parity
 
+Keep development, staging and production as similar as possible
+
 - [ ] See "II. Dependencies"
 - [ ] Use the same tools in dev as what is used in production. For example, no developer-specific tools such as SQLite or lightweight db adapaters for development. Utilize Docker for easy local install.
 - [ ] Eliminate the "personnel gap". Have developers be involved with the production deployment
 - [ ] Eliminate the "time gap". Release code that was written within hours later instead of days or weeks.
 
 ##### XI. Logs
+
+Treat logs as event streams
 
 - [ ] Write logs standard out
 - [ ] In non-local/dev environments, centralize logs from multiple replicas (see VIII.) in a single UI. Such as by implementing the ELK stack.
@@ -90,6 +108,8 @@ In addition to the "bare-minimum" requirements above, you should be able to take
 - [ ] Run analytics for data-driven decisions
 
 ##### XII. Admin Processes
+
+Run admin/management tasks as one-off processes. Same environment as running applications
 
 - [ ] Run one-off scripts (such as a database backup) in same environment and configuration as the application. This can be done with Docker using the `docker exec` or `kubectl exec` commands.
 - [ ] Store admin scripts in same version control as the app to avoid synchonization issues

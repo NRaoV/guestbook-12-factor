@@ -50,6 +50,8 @@ podTemplate(label: 'mypod', cloud: cloud, serviceAccount: serviceAccount, namesp
                 }
             }
         }
+        stage('Test Docker Image'){}
+        stage('Scan Image for Vulnerabilities'){}
         container('kubectl') {
             stage('Deploy new Docker Image') {
                 sh """

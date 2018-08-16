@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: "{{ .Release.Name }}-web"
-        image: djccarew/guestbook
+        image: jzaccone/guestbook
         imagePullPolicy: Always
         ports:
         - name: http

@@ -38,6 +38,8 @@ podTemplate(label: 'mypod', cloud: cloud, serviceAccount: serviceAccount, namesp
                 docker build -t ${env.REGISTRY}/${env.NAMESPACE}/guestbook:${env.BUILD_NUMBER} .
                 """
             }
+            stage('Test Docker Image'){}
+            stage('Scan Image for Vulnerabilities'){}
             stage('Push Docker Image to Registry') {
                 withCredentials([usernamePassword(credentialsId: registryCredsID,
                                                usernameVariable: 'USERNAME',
@@ -50,8 +52,6 @@ podTemplate(label: 'mypod', cloud: cloud, serviceAccount: serviceAccount, namesp
                 }
             }
         }
-        stage('Test Docker Image'){}
-        stage('Scan Image for Vulnerabilities'){}
         container('kubectl') {
             stage('Deploy new Docker Image') {
                 sh """

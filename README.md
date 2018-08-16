@@ -2,9 +2,9 @@
 # 12 Factor Guestbook App
 
 ### Preface: Microservices and Cloud Platforms
-Microservices will help solve some problems of monolithic aapplications. Long release cycles, long technical debt, inefficient use of infrastucture. But its comes with a new set of problems such as managing dynamic deployment environments, support for rapid deployments, required automation and avoiding dependency matric of hell. But, by adopting cloud-native architecture and following the 12-factor best practices, we can overcome some of these issues.
+Microservices will help solve some problems of monolithic applications: long release cycles, large amounts of technical debt and inefficient use of infrastucture. But its comes with a new set of problems such as deploying on distributed environments, support for rapid deployments, increased need for automation and the need for portability for your application. The problems are not to be taken lightly, but by making use of cloud platforms and following the 12-factor best practices, we can overcome some of these issues.
 
-The following checklist is focused on a single app running in a microservice architecture in a cloud environment. This checklist is not a complete list of everything you need to know about microservices or cloud-native architectures, but it will eliminate a lot of the common anti-patterns, especially when migrating over from a monolithic applicaiton. T
+The following checklist is focused on a single app running in a microservice architecture in a cloud environment. This checklist is not a complete list of everything you need to know about microservices or cloud-native architectures, but it will eliminate a lot of the common anti-patterns, especially when migrating over from a monolithic applications.
 
 This repo is written in Java and uses Docker, Kubernetes and Helm to complete this checklist. Feel free to apply 12-factor with any tools that you find useful.
 
@@ -18,10 +18,10 @@ I. Codebase
 II. Dependencies
 
 - [ ] All dependencies are explicitly declared using a dependency declaration manifest such as a [Dockerfile](Dockerfile).
-- [ ] Your app runs in isolation to prevent any system dependencies from being used accidently such as in a Docker container. 
-- [ ] Dependencies are declared and isolated the same way for development and production environments
+- [ ] Your app runs in isolation to prevent any system dependencies from being used accidently, such as in a Docker container. 
+- [ ] Dependencies are declared and isolated the same way for development and production environments.
 
- There are language specific options such as using a `Gemfile` as a manifest and `bundle exec` for isolation, but Docker enables container orchestration tools that solve distributed application problems that you will have when developing microservices.
+ There are language specific options such as using a `Gemfile` as a manifest and `bundle exec` for isolation, but Docker is recommended as it enables container orchestration tools that solve distributed application problems that you will have when developing microservices.
 
 III. Config
 
@@ -31,13 +31,13 @@ III. Config
 
 IV. Backing Services
 
-- [ ] Connect to backing resources via URL + secrets. Example of loading cloudant database via URL in Java code[here](src/main/java/wasdev/sample/store/CloudantVisitorStore.java)
-- [ ] Externize connection info into external config. Such as in [helm values.yaml](charts/liberty-starter/values.yaml)
+- [ ] Connect to backing resources via URL + secrets. Example of loading cloudant database via URL in Java code: [here](src/main/java/wasdev/sample/store/CloudantVisitorStore.java)
+- [ ] Externize connection info into external config. Such as in helm [values.yaml](charts/liberty-starter/values.yaml)
 
 V. Build, Release, Run
 
-- [ ] Builds are triggered via a code change. With microservices, this must be automated and ideally this automation lives in source control with the app. Such as with a (JenkinsFile)[JenkinsFile]
-- [ ] Builds result in a release with a unique release ID to be easily refered to in the "Run" stage. Example of a release would be a Docker Image, stored in a central registry (accessable in all environments), tagged with a release ID such as a build number or git commit hash.
+- [ ] Builds are triggered via a code change. With microservices, this must be automated and this automation lives in source control with the app. Such as with a (JenkinsFile)[JenkinsFile]
+- [ ] Builds result in a release with a unique release ID to be easily referenced in the "Run" stage. Example of a release would be a Docker Image, stored in a central registry (accessable in all environments), tagged with a release ID such as a build number or git commit hash.
 - [ ] You can scale out/in an existing release, or rollback to a previous release without requiring a new build or release. This can be handled easily with a tool like Kubernetes.
 
 VI. Processes
@@ -51,7 +51,7 @@ VII. Port Binding
 
 VIII. Concurrency
 
-- [ ] Scale out by adding more instances of your application (horizontal scaling) rather than adding more resources (vertical scaling) This is done in Kubernetes by increasing the number of replicas in the [deployment.yaml](charts/liberty-starter/templates/deployment.yaml) or by using the `kubectl scale` command
+- [ ] Scale out by adding more instances of your application (horizontal scaling) rather than adding more resources (vertical scaling). This is done in Kubernetes by increasing the number of replicas in the [deployment.yaml](charts/liberty-starter/templates/deployment.yaml) or by using the `kubectl scale` command
 
 IX. Disposability
 

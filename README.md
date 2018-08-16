@@ -10,7 +10,7 @@ This repo is written in Java and uses Docker, Kubernetes and Helm to complete th
 
 Visualization of over-simplified microservice architecture:
 
-![](images/microservices-simplified.png)
+![](images/microservices-simplified2.png | width=300)
 
 ### The 12-Factor Checklist
 I. Codebase

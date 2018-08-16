@@ -62,7 +62,7 @@ podTemplate(label: 'mypod', cloud: cloud, serviceAccount: serviceAccount, namesp
                     exit 1
                 fi
                 # Update Deployment
-                kubectl --namespace=${env.NAMESPACE} set image \${DEPLOYMENT} guestbook-web-deployment=${env.REGISTRY}/${env.NAMESPACE}/guestbook:${env.BUILD_NUMBER}
+                kubectl --namespace=${env.NAMESPACE} set image \${DEPLOYMENT} guestbook-web=${env.REGISTRY}/${env.NAMESPACE}/guestbook:${env.BUILD_NUMBER}
                 kubectl --namespace=${env.NAMESPACE} rollout status \${DEPLOYMENT}
                 """
             }

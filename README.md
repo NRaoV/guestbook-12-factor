@@ -2,7 +2,7 @@
 # 12 Factor Guestbook App
 
 ### Preface: Microservices and Cloud Platforms
-Microservices will help solve some problems of monolithic aapplications. Long release cycles, long technical debt
+Microservices will help solve some problems of monolithic aapplications. Long release cycles, long technical debt, inefficient use of infrastucture. But its comes with a new set of problems such as managing dynamic deployment environments, support for rapid deployments, required automation and avoiding dependency matric of hell. But, by adopting cloud-native architecture and following the 12-factor best practices, we can overcome some of these issues.
 
 The following checklist is focused on a single app running in a microservice architecture in a cloud environment. This checklist is not a complete list of everything you need to know about microservices or cloud-native architectures, but it will eliminate a lot of the common anti-patterns, especially when migrating over from a monolithic applicaiton. T
 
@@ -88,4 +88,6 @@ XII. Admin Processes
 
 ### Other resources to help
 [Do you have microservices? Or do you just have distributed balls of mud](http://www.codingthearchitecture.com/2014/07/06/distributed_big_balls_of_mud.html)
+
 [Designing microservice boundaries with bounded context](https://martinfowler.com/bliki/BoundedContext.html)
+

@@ -3,6 +3,8 @@
 
 [Slides](https://www.slideshare.net/JohnZaccone/docker12-factor?qid=d87ee931-6fe2-4a3d-8403-dfc9bc189dfd&v=&b=&from_search=3) that go with this GitHub project.
 
+[Slides](https://www.slideshare.net/JohnZaccone/build-12factor-apps-with-docker) from CloudNative London.
+
 ### Preface: Microservices and Cloud Platforms
 Microservices will help solve some problems of monolithic applications: long release cycles, large amounts of technical debt and inefficient use of infrastucture. But its comes with a new set of problems such as deploying on distributed environments, support for rapid deployments, increased need for automation and the need for portability for your application. The problems are not to be taken lightly, but by making use of cloud platforms and following the 12-factor best practices, we can overcome some of these issues.
 
